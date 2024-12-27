@@ -39,7 +39,7 @@ class EmployeeController extends Controller
             });
         }
 
-        
+
         $employees = $employees->get();
 
 
@@ -53,5 +53,14 @@ class EmployeeController extends Controller
 
         return datatables()->of($employees)->toJson();
     }
+
+
+    public function testZiggy($id)
+    {
+        $employee = DB::table('employees')->where('emp_no', $id)->first();
+        return view('details', compact('employee', 'id'));
+    }
+
+
 
 }

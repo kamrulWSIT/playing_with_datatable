@@ -15,6 +15,7 @@
     <script src="https://cdn.datatables.net/keytable/2.12.1/js/keyTable.dataTables.js"></script>
 
 
+
     <script>
         $(document).ready(function() {
 
@@ -41,11 +42,10 @@
                     "serverSide": true,
                     "scroller": true,
                     "scrollY": "700px",
-                    "searching": true,
-
+                    "searching": false,
 
                     "info": false,
-                    "ordering": true,
+                    "ordering": false,
 
                     "ajax": {
                         "url": "{{ route('get.employees') }}",
@@ -59,12 +59,20 @@
                         { data: 'gender' },
                         { data: 'hire_date' },
                         { data: 'title' },
+                        {
+                            data: 'emp_no',
+                            render: function (data, type, row) {
+                                return `<a href="${route('employee.details', { id: data })}">View Details</a>`;
+                            }
+                        }
                     ]
                 });
             @endif
         });
 
     </script>
+
+
 
 
 @endpush
@@ -80,6 +88,8 @@
                 <th>Gender</th>
                 <th>Hire Date</th>
                 <th>Title</th>
+                <th>Link</th>
+
             </tr>
         </thead>
     </table>
