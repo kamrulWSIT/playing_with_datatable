@@ -1,10 +1,6 @@
 @extends('app')
 
-@push('styles')
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/scroller/2.4.3/css/scroller.dataTables.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/keytable/2.12.1/css/keyTable.dataTables.css">
-@endpush
+
 
 @push('scripts')
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
@@ -62,7 +58,7 @@
                         {
                             data: 'emp_no',
                             render: function (data, type, row) {
-                                return `<a href="${route('employee.details', { id: data })}">View Details</a>`;
+                                return `<a href="/employee/details/${data}">View Details</a>`;
                             }
                         }
                     ]
@@ -72,7 +68,24 @@
 
     </script>
 
+    <style>
+        .dt-scroll-head{
+            display: none;
+        }
+        .dt-length{
+            display: none;
+        }
+        .dt-paging{
+            display: none;
+        }
+    </style>
+@endpush
 
+
+@push('styles')
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/scroller/2.4.3/css/scroller.dataTables.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/keytable/2.12.1/css/keyTable.dataTables.css">
 
 
 @endpush
