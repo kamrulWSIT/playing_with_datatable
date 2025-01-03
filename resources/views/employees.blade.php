@@ -3,11 +3,17 @@
 
 @push('scripts')
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+
+    {{--  Include Select2 JS CDN  --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
     <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
     <script src="https://cdn.datatables.net/scroller/2.4.3/js/dataTables.scroller.js"></script>
     <script src="https://cdn.datatables.net/scroller/2.4.3/js/scroller.dataTables.js"></script>
     <script src="https://cdn.datatables.net/keytable/2.12.1/js/dataTables.keyTable.js"></script>
     <script src="https://cdn.datatables.net/keytable/2.12.1/js/keyTable.dataTables.js"></script>
+
+
 
     <script>
         $(document).ready(function() {
@@ -30,7 +36,7 @@
                     ]
                 });
             @elseif(Route::is('scroll.employees'))
-                $('#myTable').DataTable({
+            var table = $('#myTable').DataTable({
                     "processing": true,
                     "serverSide": true,
                     "scroller": true,
@@ -42,7 +48,14 @@
 
                     "ajax": {
                         "url": "{{ route('get.employees') }}",
-                        "type": "GET"
+                        "type": "GET",
+
+
+                        "data": function (d) {
+                            d.gender = $('#filter').val() || 'all';
+                        }
+
+
                     },
                     "columns": [
                         { data: 'emp_no' },
@@ -61,10 +74,25 @@
                     ]
                 });
 
+
+                // Add event listener for the dropdown
+                $('#filter').change(function () {
+                    table.ajax.reload(); // Reload the table with the new filter
+                });
+
             @endif
         });
 
     </script>
+
+
+    <script>
+        $(document).ready(function() {
+            $('#filter').select2();
+        });
+    </script>
+
+
 
     <style>
         .dt-scroll-head{
@@ -95,6 +123,16 @@
 @section('contents')
 
 
+<div class="row mb-5">
+    <div class="col-md-3">
+        <h3>Gender Select Option</h3>
+        <select id="filter" class="form-select" name="gender">
+            <option value="all">All</option>
+            <option value="M">Male</option>
+            <option value="F">Female</option>
+        </select>
+    </div>
+</div>
 
 <div class="row">
     <div class="col">

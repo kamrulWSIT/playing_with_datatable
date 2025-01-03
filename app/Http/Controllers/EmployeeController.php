@@ -36,6 +36,13 @@ class EmployeeController extends Controller
             });
         }
 
+
+        if ($request->has('gender') && $request->gender !== 'all') {
+            $employees->where('employees.gender', $request->gender);
+        }
+
+
+
         $employees = $employees->get();
 
         $employees->transform(function($employee) {
