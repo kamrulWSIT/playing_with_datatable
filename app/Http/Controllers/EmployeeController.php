@@ -14,20 +14,17 @@ class EmployeeController extends Controller
 
     public function scrollIndex()
     {
+
         return view('employees');
     }
 
     public function getEmployee(Request $request)
     {
-        // $employees = DB::table('employees')->get();
-        // $employees = DB::table('employees')
-        //     ->leftJoin('titles', 'employees.emp_no', '=', 'titles.emp_no')
-        //     ->select('employees.*', 'titles.title')
-        //     ->get();
-
         $employees = DB::table('employees')
         ->leftJoin('titles', 'employees.emp_no', '=', 'titles.emp_no')
         ->select('employees.*', 'titles.title');
+
+
 
         if ($request->has('search') && $request->search['value']) {
             $search = $request->search['value'];
@@ -39,9 +36,7 @@ class EmployeeController extends Controller
             });
         }
 
-
         $employees = $employees->get();
-
 
         $employees->transform(function($employee) {
             $employee->hire_date = date("F j, Y", strtotime($employee->hire_date));
@@ -52,6 +47,7 @@ class EmployeeController extends Controller
         });
 
         return datatables()->of($employees)->toJson();
+
     }
 
 
@@ -60,7 +56,4 @@ class EmployeeController extends Controller
         $employee = DB::table('employees')->where('emp_no', $id)->first();
         return view('details', compact('employee', 'id'));
     }
-
-
-
 }

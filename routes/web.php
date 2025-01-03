@@ -22,10 +22,9 @@ Route::get('/', function () {
 
 Route::get('/employees', [EmployeeController::class, 'index'])->name('employees');
 
+
 Route::get('/scroll-employees', [EmployeeController::class, 'scrollIndex'])->name('scroll.employees');
+Route::get('/get-employees', [EmployeeController::class, 'getEmployee'])->name('get.employees');
 
 
 Route::get('/test-ziggy/{id}', [EmployeeController::class, 'testZiggy'])->name('employee.details');
-
-
-Route::get('/get-employees', [EmployeeController::class, 'getEmployee'])->name('get.employees');

@@ -1,7 +1,6 @@
 @extends('app')
 
 
-
 @push('scripts')
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
@@ -9,8 +8,6 @@
     <script src="https://cdn.datatables.net/scroller/2.4.3/js/scroller.dataTables.js"></script>
     <script src="https://cdn.datatables.net/keytable/2.12.1/js/dataTables.keyTable.js"></script>
     <script src="https://cdn.datatables.net/keytable/2.12.1/js/keyTable.dataTables.js"></script>
-
-
 
     <script>
         $(document).ready(function() {
@@ -63,6 +60,7 @@
                         }
                     ]
                 });
+
             @endif
         });
 
@@ -83,6 +81,10 @@
 
 
 @push('styles')
+
+
+
+
     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/scroller/2.4.3/css/scroller.dataTables.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/keytable/2.12.1/css/keyTable.dataTables.css">
@@ -91,19 +93,26 @@
 @endpush
 
 @section('contents')
-    <table class="table" id="myTable">
-        <thead>
-            <tr>
-                <th>Employee No.</th>
-                <th>Birth Day</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Gender</th>
-                <th>Hire Date</th>
-                <th>Title</th>
-                <th>Link</th>
 
-            </tr>
-        </thead>
-    </table>
+
+
+<div class="row">
+    <div class="col">
+        <table class="table" id="myTable">
+            <thead>
+                <tr>
+                    <th>Employee No.</th>
+                    <th>Birth Day</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Gender</th>
+                    <th>Hire Date</th>
+                    <th>Title</th>
+                    <th>Link</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
 @endsection
